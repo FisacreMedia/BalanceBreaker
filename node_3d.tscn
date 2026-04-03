@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bvcacudb5uthw"]
+
+[ext_resource type="Script" uid="uid://cw22wtb1gwuon" path="res://Scripts/player.gd" id="1_a202f"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_noarx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_a0tk4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_r3fl7"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jka67"]
+size = Vector3(12.926697, 1, 14.835205)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
+
+[sub_resource type="Sky" id="Sky_a202f"]
+sky_material = SubResource("ProceduralSkyMaterial_a202f")
+
+[sub_resource type="Environment" id="Environment_noarx"]
+background_mode = 2
+sky = SubResource("Sky_a202f")
+
+[node name="Node3D" type="Node3D" unique_id=892485513]
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1764945684]
+script = ExtResource("1_a202f")
+input_left = "Left"
+input_right = "Right"
+input_forward = "Forward"
+input_backward = "Backward"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=501071968]
+mesh = SubResource("CapsuleMesh_noarx")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1912147242]
+shape = SubResource("CapsuleShape3D_a0tk4")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=790623025]
+transform = Transform3D(1, 0, 0, 0, 0.43581238, 0.9000375, 0, -0.9000375, 0.43581238, 0, 5.5256157, 2.2406082)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=285858005]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.061219, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1636117428]
+transform = Transform3D(19.48, 0, 0, 0, 0.395, 0, 0, 0, 28.6, 0, 0, 0)
+mesh = SubResource("BoxMesh_r3fl7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1399679970]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6929626, 0, -4.069458)
+shape = SubResource("BoxShape3D_jka67")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1237513160]
+environment = SubResource("Environment_noarx")
