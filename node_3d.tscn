@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://bvcacudb5uthw"]
 
 [ext_resource type="Script" uid="uid://cw22wtb1gwuon" path="res://Scripts/player.gd" id="1_a202f"]
-[ext_resource type="Script" uid="uid://c02ou3l7evlkh" path="res://Scripts/character_model.gd" id="2_a0tk4"]
 [ext_resource type="Script" uid="uid://j0pgt6ld1m1p" path="res://Scripts/follow_camera.gd" id="2_noarx"]
+[ext_resource type="Script" uid="uid://bnofhq6k803ii" path="res://Scripts/ray_cast_3d.gd" id="4_jka67"]
 [ext_resource type="Script" uid="uid://41phk3o70rc3" path="res://Scripts/NPC.gd" id="4_r3fl7"]
+[ext_resource type="Script" uid="uid://cavkvynjjholu" path="res://Scripts/interact_prompt.gd" id="5_jka67"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_noarx"]
 
@@ -53,7 +54,6 @@ input_backward = "Backward"
 [node name="CharacterModel" type="MeshInstance3D" parent="Player" unique_id=501071968]
 mesh = SubResource("CapsuleMesh_noarx")
 surface_material_override/0 = SubResource("StandardMaterial3D_a0tk4")
-script = ExtResource("2_a0tk4")
 
 [node name="HeadPlaceholder" type="MeshInstance3D" parent="Player/CharacterModel" unique_id=1466287464]
 transform = Transform3D(0.4306547, 0, 0, 0, 0.24705355, 0.014308054, 0, -0.008281944, 0.4268147, 0, 0.5559119, -0.5133646)
@@ -86,10 +86,16 @@ script = ExtResource("2_noarx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.565133)
 script = ExtResource("4_r3fl7")
 
-[node name="RayCast3D" type="RayCast3D" parent="TestNPC" unique_id=2091032571]
+[node name="InteractRayCast" type="RayCast3D" parent="TestNPC" unique_id=2091032571]
+target_position = Vector3(0, 0, 2.905)
+script = ExtResource("4_jka67")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TestNPC" unique_id=978452352]
 mesh = SubResource("CapsuleMesh_a0tk4")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestNPC" unique_id=1372676811]
 shape = SubResource("CapsuleShape3D_r3fl7")
+
+[node name="InteractPrompt" type="Sprite3D" parent="." unique_id=2112491847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5502849, -4.4964104)
+script = ExtResource("5_jka67")
