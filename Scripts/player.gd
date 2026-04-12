@@ -11,16 +11,16 @@ extends CharacterBody3D
 
 
 func _physics_process(delta: float) -> void:
-	var ground_plane = Plane(Vector3.UP, global_position.y)
-	var mouse_pos = get_viewport().get_mouse_position()
+	var ground_plane = Plane(Vector3.UP, global_position.y)  ## Generates a plane above the character
+	var mouse_pos = get_viewport().get_mouse_position()  ## gets the mouse's position from the viewport
 	
-	var ray_origin = camera.project_ray_origin(mouse_pos)
-	var ray_direction = camera.project_ray_normal(mouse_pos)
+	var ray_origin = camera.project_ray_origin(mouse_pos)  ## A raycast origin generated from the camera
+	var ray_direction = camera.project_ray_normal(mouse_pos)  ## Gets the direction of the raycast
 	
-	var intersection = ground_plane.intersects_ray(ray_origin, ray_direction)
+	var intersection = ground_plane.intersects_ray(ray_origin, ray_direction)  ## Gets the intersection of the ray cast and the plane above the character
 	
 	if intersection:
-		look_at(Vector3(intersection.x, global_position.y, intersection.z), Vector3.UP)
+		look_at(Vector3(intersection.x, global_position.y, intersection.z), Vector3.UP)  ## Looks at the location generated from the intersection on the x and z axis
 	
 	# Add the gravity.
 	if not is_on_floor():

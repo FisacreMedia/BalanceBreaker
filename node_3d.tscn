@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://bnofhq6k803ii" path="res://Scripts/ray_cast_3d.gd" id="4_jka67"]
 [ext_resource type="Script" uid="uid://41phk3o70rc3" path="res://Scripts/NPC.gd" id="4_r3fl7"]
 [ext_resource type="Script" uid="uid://cavkvynjjholu" path="res://Scripts/interact_prompt.gd" id="5_jka67"]
+[ext_resource type="Script" uid="uid://qvte63qw3n3u" path="res://Scripts/text_box_control.gd" id="6_i5arm"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_noarx"]
 
@@ -27,6 +28,10 @@ albedo_color = Color(0.5058824, 0.53333336, 0.5647059, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_jka67"]
 size = Vector3(19.894882, 1, 28.445404)
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_a0tk4"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r3fl7"]
+
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 
 [sub_resource type="Sky" id="Sky_a202f"]
@@ -36,10 +41,6 @@ sky_material = SubResource("ProceduralSkyMaterial_a202f")
 background_mode = 2
 sky = SubResource("Sky_a202f")
 ambient_light_energy = 5.95
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_a0tk4"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_r3fl7"]
 
 [node name="Node3D" type="Node3D" unique_id=892485513]
 
@@ -75,9 +76,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_jka67")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15958405, 0, 0.21134949)
 shape = SubResource("BoxShape3D_jka67")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1237513160]
-environment = SubResource("Environment_noarx")
-
 [node name="Camera3D" type="Camera3D" parent="." unique_id=790623025]
 transform = Transform3D(1, 0, 0, 0, 0.43581238, 0.9000375, 0, -0.9000375, 0.43581238, 0, 5.5256157, 2.2406082)
 script = ExtResource("2_noarx")
@@ -85,6 +83,7 @@ script = ExtResource("2_noarx")
 [node name="TestNPC" type="CharacterBody3D" parent="." unique_id=253055919]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.565133)
 script = ExtResource("4_r3fl7")
+npc_name = "Jeff"
 
 [node name="InteractRayCast" type="RayCast3D" parent="TestNPC" unique_id=2091032571]
 target_position = Vector3(0, 0, 2.905)
@@ -99,3 +98,17 @@ shape = SubResource("CapsuleShape3D_r3fl7")
 [node name="InteractPrompt" type="Sprite3D" parent="." unique_id=2112491847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5502849, -4.4964104)
 script = ExtResource("5_jka67")
+
+[node name="TextBoxControl" type="Control" parent="." unique_id=1385754415]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_i5arm")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1237513160]
+environment = SubResource("Environment_noarx")
+
+[connection signal="interact_not_ready" from="TestNPC" to="InteractPrompt" method="_on_test_npc_interact_not_ready"]
+[connection signal="interact_ready" from="TestNPC" to="InteractPrompt" method="_on_test_npc_interact_ready"]
+[connection signal="interact_key_pressed" from="InteractPrompt" to="TextBoxControl" method="_on_interact_prompt_interact_key_pressed"]
