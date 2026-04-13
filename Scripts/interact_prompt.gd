@@ -2,6 +2,8 @@ extends Sprite3D
 
 signal interact_key_pressed
 
+@export var npc_that_called : NPC
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
