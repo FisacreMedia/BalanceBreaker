@@ -1,0 +1,33 @@
+class_name Npc_Main
+
+extends Node3D
+
+signal interact_ready
+signal interact_not_ready
+
+@onready var textbox_control = $"../InteractionHandler/TextBoxControl"
+@onready var interact_prompt = $"../InteractionHandler/InteractPrompt"
+var prompt_visibility = false
+
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	if interact_prompt.visible == true:
+		prompt_visibility = true
+	elif interact_prompt.visible == false:
+		prompt_visibility = false
+	else:
+		pass
+
+func _on_test_npc_npc_not_ready() -> void:
+	interact_not_ready.emit()
+
+
+func _on_test_npc_npc_ready() -> void:
+	interact_ready.emit()

@@ -2,20 +2,21 @@ class_name NPC
 
 extends CharacterBody3D
 
-@onready var textbox_control = $"../TextBoxControl"
-
 enum Alignment {ALLY, NEUTRAL, HOSTILE }
 @export var unit_alignment : Alignment
 @onready var player = $"../../Player"
 @onready var interact_shapecast = $InteractShapeCast
+@onready var camera = Camera3D
+@onready var main = $".."
 
 @export var npc_name : String
 @export var npc_health : int
 @export var npc_level : int
 
 
-signal interact_ready
-signal interact_not_ready
+
+signal npc_ready
+signal npc_not_ready
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -25,12 +26,18 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if interact_shapecast.is_colliding():
-		var collider = interact_shapecast.get_collider(1)
-		if collider == player:
-			print("player found")
-	else:
-		pass
-		##interact_ready.emit()
+		for i in range(interact_shapecast.get_collision_count()):
+			var collider = interact_shapecast.get_collider(i)
+			if collider == player:
+				print("Player found")
+				npc_ready.emit()
 		##textbox_control.interacted_npc = self
-	##else:
-		##interact_not_ready.emit()
+	else:
+		print("Player gone :(")
+		npc_not_ready.emit()
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("Interact") && main.prompt_visibility == true:
+		var player_position = Vector3(player.position.x, global_position.y, player.position.z)
+		look_at(player_position)

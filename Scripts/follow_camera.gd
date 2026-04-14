@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	position.x = player.position.x    ## follows the players x axis
 	position.z = player.position.z - follow_distance  ## follow the players z axis - the follow_distance variable
 	

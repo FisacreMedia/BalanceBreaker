@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://de34ulkmyisu5"]
 
 [ext_resource type="Script" uid="uid://41phk3o70rc3" path="res://Scripts/NPC.gd" id="1_5xrog"]
+[ext_resource type="Script" uid="uid://cpkavnaj7mon2" path="res://Scripts/test_npc_main.gd" id="1_gqbs6"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_si8h4"]
 
@@ -10,17 +11,22 @@
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_si8h4"]
 
-[node name="Node3D" type="Node3D" unique_id=822075407]
+[node name="TestNPCMain" type="Node3D" unique_id=822075407]
+script = ExtResource("1_gqbs6")
 
 [node name="TestNPC" type="CharacterBody3D" parent="." unique_id=485635554]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_5xrog")
 npc_name = "Jeff"
 
 [node name="Head" type="MeshInstance3D" parent="TestNPC" unique_id=953126208]
-transform = Transform3D(0.5342471, 0, 0, 0, 0.2681777, 0, 0, 0, 0.60937357, 0, 0.7158693, 0.24905181)
+transform = Transform3D(0.5342471, 0, 0, 0, 0.2681777, 0, 0, 0, 0.60937357, 0, 0.7158693, -0.25137103)
+layers = 4
 mesh = SubResource("BoxMesh_si8h4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="TestNPC" unique_id=487590599]
+layers = 4
 mesh = SubResource("CapsuleMesh_srm70")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="TestNPC" unique_id=257115645]
@@ -30,3 +36,7 @@ shape = SubResource("CapsuleShape3D_7cskd")
 transform = Transform3D(3.49, 0, 0, 0, 3.49, 0, 0, 0, 3.49, 0, 0.7158693, 0)
 shape = SubResource("SphereShape3D_si8h4")
 target_position = Vector3(0, 0, 0)
+collision_mask = 2
+
+[connection signal="npc_not_ready" from="TestNPC" to="." method="_on_test_npc_npc_not_ready"]
+[connection signal="npc_ready" from="TestNPC" to="." method="_on_test_npc_npc_ready"]

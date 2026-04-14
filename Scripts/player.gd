@@ -11,7 +11,7 @@ extends CharacterBody3D
 
 
 func _physics_process(delta: float) -> void:
-	var ground_plane = Plane(Vector3.UP, global_position.y)  ## Generates a plane above the character
+	var ground_plane = Plane(Vector3.UP, global_position.y)  ## Generates a plane under the character
 	var mouse_pos = get_viewport().get_mouse_position()  ## gets the mouse's position from the viewport
 	
 	var ray_origin = camera.project_ray_origin(mouse_pos)  ## A raycast origin generated from the camera

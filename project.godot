@@ -53,6 +53,13 @@ Test={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="walls"
+3d_physics/layer_2="player"
+3d_physics/layer_3="npcs & enemies"
+3d_physics/layer_20="UI Elements"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
