@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cw22wtb1gwuon" path="res://Scripts/player.gd" id="1_a202f"]
 [ext_resource type="Script" uid="uid://j0pgt6ld1m1p" path="res://Scripts/follow_camera.gd" id="2_noarx"]
+[ext_resource type="Script" uid="uid://c2yx0rp1aa86n" path="res://Scripts/interaction_handler.gd" id="4_i5arm"]
 [ext_resource type="PackedScene" uid="uid://de34ulkmyisu5" path="res://TestNPC.tscn" id="5_i5arm"]
 [ext_resource type="Script" uid="uid://cavkvynjjholu" path="res://Scripts/interact_prompt.gd" id="5_jka67"]
 [ext_resource type="Script" uid="uid://qvte63qw3n3u" path="res://Scripts/text_box_control.gd" id="6_i5arm"]
@@ -26,6 +27,9 @@ albedo_color = Color(0.5058824, 0.53333336, 0.5647059, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jka67"]
 size = Vector3(19.894882, 1, 28.445404)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i5arm"]
+bg_color = Color(1, 1, 1, 1)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a202f"]
 
@@ -79,18 +83,37 @@ script = ExtResource("2_noarx")
 
 [node name="TestNPCMain" parent="." unique_id=822075407 instance=ExtResource("5_i5arm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.5116262)
+npc_name = "Jeff"
 
 [node name="InteractionHandler" type="Control" parent="." unique_id=1739661590]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 414.0
+offset_bottom = 216.0
+script = ExtResource("4_i5arm")
 
 [node name="TextBoxControl" type="Control" parent="InteractionHandler" unique_id=1385754415]
+visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 311.0
+offset_top = 392.0
+offset_right = 618.0
+offset_bottom = 475.0
 script = ExtResource("6_i5arm")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="InteractionHandler/TextBoxControl" unique_id=1370550752]
+layout_mode = 0
+offset_left = -1.0
+offset_right = 307.0
+offset_bottom = 83.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_i5arm")
+text = "PlaceHolder"
+fit_content = true
+tab_size = 13
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="InteractPrompt" type="Sprite3D" parent="InteractionHandler" unique_id=2112491847]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5502849, -4.4964104)
@@ -103,4 +126,6 @@ environment = SubResource("Environment_noarx")
 
 [connection signal="interact_not_ready" from="TestNPCMain" to="InteractionHandler/InteractPrompt" method="_on_test_npc_main_interact_not_ready"]
 [connection signal="interact_ready" from="TestNPCMain" to="InteractionHandler/InteractPrompt" method="_on_test_npc_main_interact_ready"]
-[connection signal="interact_key_pressed" from="InteractionHandler/InteractPrompt" to="InteractionHandler/TextBoxControl" method="_on_interact_prompt_interact_key_pressed"]
+[connection signal="textbox_edit_checked" from="TestNPCMain" to="InteractionHandler" method="_on_test_npc_main_textbox_edit_checked"]
+[connection signal="textbox_edit_check" from="InteractionHandler" to="TestNPCMain" method="_on_interaction_handler_textbox_edit_check"]
+[connection signal="interact_key_pressed" from="InteractionHandler/InteractPrompt" to="InteractionHandler" method="_on_interact_prompt_interact_key_pressed"]

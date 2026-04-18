@@ -9,9 +9,7 @@ enum Alignment {ALLY, NEUTRAL, HOSTILE }
 @onready var camera = Camera3D
 @onready var main = $".."
 
-@export var npc_name : String
-@export var npc_health : int
-@export var npc_level : int
+
 
 
 
