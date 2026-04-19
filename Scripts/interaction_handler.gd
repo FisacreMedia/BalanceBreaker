@@ -4,10 +4,8 @@ signal textbox_edit_check
 @onready var talking_npc : Npc_Main
 var npc_name : String
 @onready var dialogue_controller = $TextBoxControl
-@onready var player_ready_to_interact = $"../TestNPCMain".player_near
 @onready var player = $"../Player"
 var npc_checked = false
-
 
 ## Signals for each npc to handle what dialogue gets shown
 signal jeff_npc
@@ -27,5 +25,5 @@ func _physics_process(delta: float) -> void:
 	if npc_checked == false:
 		if npc_name == "Jeff":
 			npc_checked = true
-			print("Checkedw")
+			print("Checked")
 			jeff_npc.emit()
