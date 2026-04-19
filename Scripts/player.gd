@@ -8,9 +8,12 @@ extends CharacterBody3D
 @export var input_backward : String = "ui_down"
 @export var sensitivity = 100
 @onready var camera = $"../Camera3D"
-
+@export var is_in_dialogue = false
 
 func _physics_process(delta: float) -> void:
+	if is_in_dialogue == true:
+		velocity = Vector3.ZERO
+		return
 	var ground_plane = Plane(Vector3.UP, global_position.y)  ## Generates a plane under the character
 	var mouse_pos = get_viewport().get_mouse_position()  ## gets the mouse's position from the viewport
 	

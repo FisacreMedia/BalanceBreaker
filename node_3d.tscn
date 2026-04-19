@@ -124,8 +124,10 @@ script = ExtResource("5_jka67")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1237513160]
 environment = SubResource("Environment_noarx")
 
+[connection signal="interact_not_ready" from="TestNPCMain" to="InteractionHandler/TextBoxControl" method="_on_test_npc_main_interact_not_ready"]
 [connection signal="interact_not_ready" from="TestNPCMain" to="InteractionHandler/InteractPrompt" method="_on_test_npc_main_interact_not_ready"]
 [connection signal="interact_ready" from="TestNPCMain" to="InteractionHandler/InteractPrompt" method="_on_test_npc_main_interact_ready"]
 [connection signal="textbox_edit_checked" from="TestNPCMain" to="InteractionHandler" method="_on_test_npc_main_textbox_edit_checked"]
+[connection signal="jeff_npc" from="InteractionHandler" to="InteractionHandler/TextBoxControl" method="_on_interaction_handler_jeff_npc"]
 [connection signal="textbox_edit_check" from="InteractionHandler" to="TestNPCMain" method="_on_interaction_handler_textbox_edit_check"]
 [connection signal="interact_key_pressed" from="InteractionHandler/InteractPrompt" to="InteractionHandler" method="_on_interact_prompt_interact_key_pressed"]

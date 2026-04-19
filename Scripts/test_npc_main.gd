@@ -14,6 +14,7 @@ signal textbox_edit_checked
 @onready var interact_prompt = $"../InteractionHandler/InteractPrompt"
 @onready var interaction_handler = $"../InteractionHandler"
 var prompt_visibility = false
+var player_near : bool
 
 
 
@@ -33,10 +34,12 @@ func _process(delta: float) -> void:
 
 func _on_test_npc_npc_not_ready() -> void:
 	interact_not_ready.emit()
+	player_near = false
 
 
 func _on_test_npc_npc_ready() -> void:
 	interact_ready.emit()
+	player_near = true
 
 
 func _on_interaction_handler_textbox_edit_check() -> void:

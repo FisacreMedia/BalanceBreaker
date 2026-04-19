@@ -8,6 +8,7 @@ enum Alignment {ALLY, NEUTRAL, HOSTILE }
 @onready var interact_shapecast = $InteractShapeCast
 @onready var camera = Camera3D
 @onready var main = $".."
+var player_near : bool
 
 
 
