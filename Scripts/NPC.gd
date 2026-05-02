@@ -28,11 +28,9 @@ func _physics_process(delta: float) -> void:
 		for i in range(interact_shapecast.get_collision_count()):
 			var collider = interact_shapecast.get_collider(i)
 			if collider == player:
-				print("Player found")
 				npc_ready.emit()
 		##textbox_control.interacted_npc = self
 	else:
-		print("Player gone :(")
 		npc_not_ready.emit()
 
 

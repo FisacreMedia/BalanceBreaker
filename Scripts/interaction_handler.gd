@@ -22,8 +22,12 @@ func _on_test_npc_main_textbox_edit_checked() -> void:
 	print(npc_name)
 
 func _physics_process(delta: float) -> void:
-	if npc_checked == false:
+	if npc_checked == false and dialogue_controller.dialogue_active == true:
 		if npc_name == "Jeff":
-			npc_checked = true
 			print("Checked")
 			jeff_npc.emit()
+
+
+func _on_text_box_control_dialogue_done() -> void:
+	npc_checked = false
+	dialogue_controller.dialogue_active = false
