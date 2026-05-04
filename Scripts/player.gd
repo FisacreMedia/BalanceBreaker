@@ -9,18 +9,23 @@ extends CharacterBody3D
 @export var sensitivity = 100
 @onready var camera = $"../Camera3D"
 @export var is_in_dialogue = false
+@onready var fake_mouse = $"../UserInterface/FakeMouse"
+
+func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
 func _physics_process(delta: float) -> void:
-	if is_in_dialogue == true:
-		velocity = Vector3.ZERO
-		return
 	var ground_plane = Plane(Vector3.UP, global_position.y)  ## Generates a plane under the character
-	var mouse_pos = get_viewport().get_mouse_position()  ## gets the mouse's position from the viewport
+	var mouse_pos = fake_mouse.position  ## gets the mouse's position from the viewport
 	
 	var ray_origin = camera.project_ray_origin(mouse_pos)  ## A raycast origin generated from the camera
 	var ray_direction = camera.project_ray_normal(mouse_pos)  ## Gets the direction of the raycast
 	
 	var intersection = ground_plane.intersects_ray(ray_origin, ray_direction)  ## Gets the intersection of the ray cast and the plane above the character
+	
+	if is_in_dialogue == true:
+		velocity = Vector3.ZERO
+		return
 	
 	if intersection:
 		look_at(Vector3(intersection.x, global_position.y, intersection.z), Vector3.UP)  ## Looks at the location generated from the intersection on the x and z axis
