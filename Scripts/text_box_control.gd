@@ -3,6 +3,7 @@ extends Control
 @export var interacted_npc : NPC
 @onready var interaction_handler = $".."
 @onready var dialogue = $RichTextLabel
+@onready var TempJeff = $TempCharSprite
 var who_talking : String
 var dialogue_active = false
 var line_number = 1
