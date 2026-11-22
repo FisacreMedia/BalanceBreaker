@@ -8,14 +8,18 @@ var who_talking : String
 var dialogue_active = false
 var line_number = 1
 @onready var talking_npc = interaction_handler.talking_npc
-
-
+var sprite1 = load("res://Assets/character_icons/test/Godot_icon.svg-146909070.png")
+var sprite2 = load("res://Assets/character_icons/test/OIP-1534372348.jpg")
+var sprite1_test_size = Vector2(0.05, 0.05)
+var sprite2_test_size = Vector2(0.33, 0.3)
 
 signal textbox_edit
 signal dialogue_done
 
 func _on_interaction_handler_jeff_npc() -> void:
 	interaction_handler.player.is_in_dialogue = true
+	TempSprite.texture = sprite2
+	TempSprite.scale = sprite2_test_size
 	visible = true
 	who_talking = "Jeff"
 	interaction_handler.npc_checked = true
@@ -25,7 +29,6 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Next") and dialogue_active == true:
 		line_number += 1
 		if who_talking == "Jeff":
-			TempSprite.texture = ImageTexture.create_from_image(TempSprite.image)
 			if line_number <= 3:
 				jeff_dialogue()
 			elif line_number == 4:
