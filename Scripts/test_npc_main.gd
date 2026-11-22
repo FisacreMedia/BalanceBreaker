@@ -24,7 +24,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if interact_prompt.visible == true:
 		prompt_visibility = true
 	elif interact_prompt.visible == false:

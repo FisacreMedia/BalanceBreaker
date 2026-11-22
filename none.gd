@@ -1,4 +1,4 @@
-class_name Npc_Main
+
 
 extends Node3D
 

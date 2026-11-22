@@ -3,7 +3,7 @@ extends Control
 @export var interacted_npc : NPC
 @onready var interaction_handler = $".."
 @onready var dialogue = $RichTextLabel
-@onready var TempJeff = $TempCharSprite
+@onready var TempSprite = $TempCharSprite
 var who_talking : String
 var dialogue_active = false
 var line_number = 1
@@ -25,6 +25,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("Next") and dialogue_active == true:
 		line_number += 1
 		if who_talking == "Jeff":
+			TempSprite.texture = ImageTexture.create_from_image(TempSprite.image)
 			if line_number <= 3:
 				jeff_dialogue()
 			elif line_number == 4:
